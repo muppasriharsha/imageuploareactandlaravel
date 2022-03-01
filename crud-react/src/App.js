@@ -6,8 +6,13 @@ import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.css";
 import LoginPage from "./component/LoginPage/LoginPage";
 
-import { BrowserRouter as Router , Routes, Route, Link,
-  useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
 import EditProduct from "./component/product/edit.component";
 import ViewProduct from "./component/product/view.component";
@@ -18,36 +23,38 @@ export const AuthContext = React.createContext(false);
 function App() {
   let navigate = useNavigate();
   const [isLogged, setIsLogged] = React.useState(false);
-  let FormHandling = (x) => {
+  const [userId, setUserId] = React.useState();
+  let FormHandling = (x, uid) => {
     setIsLogged(x);
+    setUserId(uid);
   };
 
   return (
-//   <Router>
-//     <Navbar bg="primary">
-//       <Container>
-//         <Link to={"/"} className="navbar-brand text-white">
-//           Employee Details
-//         </Link>
-//       </Container>
-//     </Navbar>
+    //   <Router>
+    //     <Navbar bg="primary">
+    //       <Container>
+    //         <Link to={"/"} className="navbar-brand text-white">
+    //           Employee Details
+    //         </Link>
+    //       </Container>
+    //     </Navbar>
 
-//     <Container className="mt-5">
-//       <Row>
-//         <Col md={12}>
-//           <Routes>
-//             <Route path="/product/create" element={<CreateProduct />} />
-//             <Route path="/product/edit/:id" element={<EditProduct />} />
-//             <Route path="/product/view/:id" element={<ViewProduct />} />
-//             <Route exact path='/' element={<ProductList />} />
-//           </Routes>
-//         </Col>
-//       </Row>
-//     </Container>
-//   </Router>);
-// }
+    //     <Container className="mt-5">
+    //       <Row>
+    //         <Col md={12}>
+    //           <Routes>
+    //             <Route path="/product/create" element={<CreateProduct />} />
+    //             <Route path="/product/edit/:id" element={<EditProduct />} />
+    //             <Route path="/product/view/:id" element={<ViewProduct />} />
+    //             <Route exact path='/' element={<ProductList />} />
+    //           </Routes>
+    //         </Col>
+    //       </Row>
+    //     </Container>
+    //   </Router>);
+    // }
 
-<AuthContext.Provider value={isLogged}>
+    <AuthContext.Provider value={isLogged}>
       <Navbar bg="primary">
         <Container>
           {!isLogged ? (
@@ -95,7 +102,10 @@ function App() {
                 }
               />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/product/create" element={<CreateProduct />} />
+              <Route
+                path="/product/create"
+                element={<CreateProduct uid={userId} />}
+              />
               <Route path="/product/edit/:id" element={<EditProduct />} />
               <Route path="/product/view/:id" element={<ViewProduct />} />
             </Routes>
