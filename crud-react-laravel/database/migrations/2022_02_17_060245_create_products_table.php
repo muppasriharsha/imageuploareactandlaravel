@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('State_ID');
             $table->string('City_ID');
             $table->text('image');
+            $table->integer('Create_By');
             $table->timestamps();
         });
     }

@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\usersController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('products',ProductController::class);
+
+// users login
+Route::post('userslogin',[usersController::class,'login']);

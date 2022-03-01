@@ -54,7 +54,7 @@ export default function List() {
           <div className="row">
             <div className='col-12'>
                 <Link className='btn btn-primary mb-2 float-end' to={"/product/create"}>
-                    Create Product
+                    Create 
                 </Link>
             </div>
             <div className="col-12">
@@ -75,7 +75,8 @@ export default function List() {
                             <tbody>
                                 {
                                     products.length > 0 && (
-                                        products.map((row, key)=>(
+                                        products.map((row, key)=>{
+                                                if(row.Created_By==1){
                                             <tr key={key}>
                                                 <td>{row.FirstName}</td>
                                                 <td>{row.LastName}</td>
@@ -85,7 +86,11 @@ export default function List() {
                                                 <td>
                                                     <img width="50px" src={`http://localhost:8000/storage/product/image/${row.image}`} />
                                                 </td>
+                                                {/* <td>{row.City_ID}</td> */}
                                                 <td>
+                                                <Link to={`/product/view/${row.user_Id}`} className='btn btn-success me-2'>
+                                                        view
+                                                    </Link>
                                                     <Link to={`/product/edit/${row.user_Id}`} className='btn btn-success me-2'>
                                                         Edit
                                                     </Link>
@@ -93,8 +98,11 @@ export default function List() {
                                                         Delete
                                                     </Button>
                                                 </td>
-                                            </tr>
-                                        ))
+                                            </tr>}
+                                            else{
+                                                null
+                                            }
+                                        })
                                     )
                                 }
                             </tbody>

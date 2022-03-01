@@ -11,22 +11,12 @@ use Carbon\Carbon;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        return Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image')->get();
+        return Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image','Create_By')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -35,7 +25,8 @@ class ProductController extends Controller
             'Email_ID'=>'required|email|unique:products',
             'State_ID'=>'required| regex:/^[a-zA-ZÑñ\s]+$/',
             'City_ID'=>'required| regex:/^[a-zA-ZÑñ\s]+$/',
-            'image'=>'required|image'
+            'image'=>'required|image',
+            'Created_By'=>'required'
         ]);
 
         try{
@@ -44,22 +35,17 @@ class ProductController extends Controller
             Product::create($request->post()+['image'=>$imageName]);
 
             return response()->json([
-                'message'=>'Product Created Successfully!!'
+                'message'=>' Created Employee Successfully'
             ]);
         }catch(\Exception $e){
             \Log::error($e->getMessage());
             return response()->json([
-                'message'=>'Something goes wrong while creating a product!!'
+                'message'=>'Something goes wrong while creating a Employee'
             ],500);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show(Product $product)
     {
         return response()->json([
@@ -67,13 +53,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Product $product)
     {
         $request->validate([
@@ -106,23 +86,18 @@ class ProductController extends Controller
             }
 
             return response()->json([
-                'message'=>'Product Updated Successfully!!'
+                'message'=>' Updated Employee Successfully'
             ]);
 
         }catch(\Exception $e){
             \Log::error($e->getMessage());
             return response()->json([
-                'message'=>'Something goes wrong while updating a product!!'
+                'message'=>'Something goes wrong while updating a Employee'
             ],500);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy(Product $product)
     {
         try {
@@ -137,13 +112,13 @@ class ProductController extends Controller
             $product->delete();
 
             return response()->json([
-                'message'=>'Product Deleted Successfully!!'
+                'message'=>' Deleted Employee Successfully!!'
             ]);
             
         } catch (\Exception $e) {
             \Log::error($e->getMessage());
             return response()->json([
-                'message'=>'Something goes wrong while deleting a product!!'
+                'message'=>'Something goes wrong while deleting a Employee'
             ]);
         }
     }

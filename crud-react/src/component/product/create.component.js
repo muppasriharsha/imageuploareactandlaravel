@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios'
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -59,6 +59,11 @@ console.log(formData.image)
         <div className="col-12 col-sm-12 col-md-6">
           <div className="card">
             <div className="card-body">
+              <div className='col-12'>
+                <Link className='btn btn-primary mb-2 float-end' to={"/"}>
+                    Back
+                </Link>
+            </div>
               <h4 className="card-title">Add Employee</h4>
               <hr />
               <div className="form-wrapper">
@@ -142,6 +147,7 @@ console.log(formData.image)
                   <Button variant="primary" className="mt-2" size="lg" block="block" type="submit">
                     Save
                   </Button>
+                 
                 </Form>
               </div>
             </div>

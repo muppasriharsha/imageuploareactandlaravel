@@ -1,0 +1,35 @@
+input.lg-inp {
+    border: 2px solid rgba(223, 130, 130, 0.075);
+    border-radius: 20px;
+    height: 50px;
+    text-align: center;
+    width: 70%;
+}
+h1 {
+    color: rgb(63, 55, 55);
+    font-weight: bold;
+}
+
+.log-frm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    width: 50vw;
+    margin: auto;
+    height: 70vh;
+    align-items: center;
+    gap: 20px;
+    background-color: rgb(209, 108, 108);
+}
+.subbtn {
+    background-color: rgb(25, 133, 133);
+    height: 20px;
+    width: 50%;
+    height: 30px;
+    color: white;
+    border-radius: 20px;
+}
+.lg-inp:focus {
+    outline: none;
+}

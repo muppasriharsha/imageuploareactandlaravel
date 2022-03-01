@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -78,11 +78,17 @@ export default function EditUser() {
 
   return (
     <div className="container">
+      {FirstName}
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-6">
           <div className="card">
             <div className="card-body">
-              <h4 className="card-title">Update Product</h4>
+            <div className='col-12'>
+                <Link className='btn btn-primary mb-2 float-end' to={"/"}>
+                    Back
+                </Link>
+            </div>
+              <h4 className="card-title">Update</h4>
               <hr />
               <div className="form-wrapper">
                 {
@@ -164,6 +170,7 @@ export default function EditUser() {
                   <Button variant="primary" className="mt-2" size="lg" block="block" type="submit">
                     Update
                   </Button>
+                  
                 </Form>
               </div>
             </div>
