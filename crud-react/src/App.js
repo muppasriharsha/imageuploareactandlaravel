@@ -1,26 +1,89 @@
-import * as React from "react";
+import  React, {useEffect, useState } from "react";
+// import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Form from 'react-bootstrap/Form'
+
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.css";
 import LoginPage from "./component/LoginPage/LoginPage";
-
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import { BrowserRouter as Router , Routes, Route, Link,
   useNavigate } from "react-router-dom";
-
+  import store from "./component/redux/store";
 import EditProduct from "./component/product/edit.component";
 import ViewProduct from "./component/product/view.component";
 import ProductList from "./component/product/list.component";
 import CreateProduct from "./component/product/create.component";
+// import { Provider as StoreProvider } from "react-redux";
+import { getDefaultNormalizer } from "@testing-library/react";
+// 
+
 export const AuthContext = React.createContext(false);
 
 function App() {
   let navigate = useNavigate();
-  const [isLogged, setIsLogged] = React.useState(false);
+  
+  const [isLogged, setIsLogged] = useState(false);
+  const [profilepic, setprofilepic] = useState({imgvalue:""});
+  
+  const allStates = useSelector((state) => state);
+  // console.log(allStates)
   let FormHandling = (x) => {
     setIsLogged(x);
   };
+
+const uploadpic=  (event)=>{
+  const file=  event.target.files[0];
+  console.log(file);
+  
+//  setprofilepic((prev)=>({...prev,imgvalue:file}));
+//   console.log(profilepic.imgvalue)
+//   console.log("hello")
+  const formdata = new FormData()
+  
+  formdata.append('profile_picture',file)
+
+  axios.post(`http://localhost:8000/api/picupload`, formdata).then(({data})=>{
+      console.log(data)
+      Swal.fire({
+        icon:"success",
+        text:data.message,
+             
+
+      })
+    
+    })
+    .catch(({response:{data}})=>{
+      Swal.fire({
+        text:data.message,
+        icon:"error"
+    })
+    })
+
+};
+
+
+
+const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+      fetchProducts()
+    },[])
+
+    
+    const fetchProducts = async () => {
+      await axios.get(`http://localhost:8000/api/getpicture`).then(({data})=>{
+          setProducts(data)
+          console.table(products)
+      })
+  }
+
+
 
   return (
 //   <Router>
@@ -48,6 +111,7 @@ function App() {
 // }
 
 <AuthContext.Provider value={isLogged}>
+{/* <StoreProvider store={store}> */}
       <Navbar bg="primary">
         <Container>
           {!isLogged ? (
@@ -64,6 +128,39 @@ function App() {
               <Link to={"/"} className="navbar-brand text-white">
                 Employee Details
               </Link>
+              <div className="navbar-brand text-white">
+               
+                <lable htmlFor="uploadpicture"> 
+                hai
+              </lable>
+
+              <img src="https://sb.kaleidousercontent.com/67418/800x533/a5ddfb21a6/persons3-nobg.png" width="50vw" alt=""/>
+              {products.length > 0 &&
+                    products.map((row, key) => {
+                      if (row.id == allStates.loginuserid) {
+                        return (
+                          <span key={key}>
+                            
+                              <img
+                                width="50px"
+                                src={`http://localhost:8000/storage/profilepic/image/${row.profile_picture}`}
+                              />
+                            
+                           
+                          </span>
+                        );
+                      } else {
+                        return "";
+                      }
+                    })}
+              <form>
+              <input type="file" id="uploadpicture"
+              //  style={{display:"none"}}
+              onChange={uploadpic}
+              /></form>
+
+
+              </div>
               <Link
                 to={"/"}
                 onClick={() => {
@@ -102,6 +199,7 @@ function App() {
           </Col>
         </Row>
       </Container>
+      {/* </StoreProvider> */}
     </AuthContext.Provider>
   );
 }

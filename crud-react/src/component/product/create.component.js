@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import { useSelector } from "react-redux";
 import { useNavigate, Link } from 'react-router-dom'
 
 export default function CreateProduct() {
@@ -18,6 +19,10 @@ export default function CreateProduct() {
 
   const [image, setImage] = useState()
   const [validationError,setValidationError] = useState({})
+
+
+  const allStates = useSelector((state) => state);
+  console.log(allStates.loginuserid)
 
   const changeHandler = (event) => {
 		setImage(event.target.files[0]);
@@ -34,6 +39,8 @@ export default function CreateProduct() {
     formData.append('State_ID', State_ID)
     formData.append('City_ID', City_ID)
     formData.append('image', image)
+    formData.append('Create_By', allStates.loginuserid)
+
 console.log(formData.image)
     await axios.post(`http://localhost:8000/api/products`, formData).then(({data})=>{
       Swal.fire({
@@ -63,6 +70,7 @@ console.log(formData.image)
                 <Link className='btn btn-primary mb-2 float-end' to={"/"}>
                     Back
                 </Link>
+                {/* {allStates.userloginid} */}
             </div>
               <h4 className="card-title">Add Employee</h4>
               <hr />

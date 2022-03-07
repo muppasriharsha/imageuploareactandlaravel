@@ -15,6 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         return Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image','Create_By')->get();
+        // ->where('Create_By','=','1')
     }
 
     public function store(Request $request)
@@ -26,7 +27,7 @@ class ProductController extends Controller
             'State_ID'=>'required| regex:/^[a-zA-ZÑñ\s]+$/',
             'City_ID'=>'required| regex:/^[a-zA-ZÑñ\s]+$/',
             'image'=>'required|image',
-            'Created_By'=>'required'
+            'Create_By'=>'required'
         ]);
 
         try{

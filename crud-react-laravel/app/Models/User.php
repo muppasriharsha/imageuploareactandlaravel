@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\QueryException; 
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_picture'
     ];
 
     /**
@@ -30,6 +32,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         // 'password',
+        'profile picture',
         'remember_token',
     ];
 

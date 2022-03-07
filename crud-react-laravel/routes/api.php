@@ -26,3 +26,5 @@ Route::resource('products',ProductController::class);
 
 // users login
 Route::post('userslogin',[usersController::class,'login']);
+Route::post('picupload',[usersController::class,'prifilepic']);
+Route::get('getpicture',[usersController::class,'getprofilepic']);

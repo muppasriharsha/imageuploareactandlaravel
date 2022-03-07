@@ -10,5 +10,5 @@ class Product extends Model
     use HasFactory;
     // public $table='posts';
     protected $primaryKey = 'user_Id';
-    protected $fillable = ['FirstName', 'LastName','Email_ID','State_ID','City_ID', 'image'];
+    protected $fillable = ['FirstName', 'LastName','Email_ID','State_ID','City_ID', 'image','Create_By'];
 }

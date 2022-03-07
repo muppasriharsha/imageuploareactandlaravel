@@ -9,11 +9,18 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+import { StrictMode } from "react";
+import store from "./component/redux/store";
+import { Provider as StoreProvider } from "react-redux";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+    <StoreProvider store={store}>
+    <StrictMode>
     <App />
+    </StrictMode>
+    </StoreProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
