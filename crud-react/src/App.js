@@ -50,6 +50,7 @@ const uploadpic=  (event)=>{
 
   axios.post(`http://localhost:8000/api/picupload`, formdata).then(({data})=>{
       console.log(data)
+      setrender(!render)
       Swal.fire({
         icon:"success",
         text:data.message,
@@ -70,10 +71,11 @@ const uploadpic=  (event)=>{
 
 
 const [products, setProducts] = useState([])
+const [render,setrender]=useState(false)
 
     useEffect(()=>{
       fetchProducts()
-    },[])
+    },[render])
 
     
     const fetchProducts = async () => {
@@ -130,11 +132,10 @@ const [products, setProducts] = useState([])
               </Link>
               <div className="navbar-brand text-white">
                
-                <lable htmlFor="uploadpicture"> 
-                hai
-              </lable>
+                <label htmlFor="uploadpicture"> 
+                
 
-              <img src="https://sb.kaleidousercontent.com/67418/800x533/a5ddfb21a6/persons3-nobg.png" width="50vw" alt=""/>
+              {/* <img src="https://sb.kaleidousercontent.com/67418/800x533/a5ddfb21a6/persons3-nobg.png" width="50vw" alt=""/> */}
               {products.length > 0 &&
                     products.map((row, key) => {
                       if (row.id == allStates.loginuserid) {
@@ -145,17 +146,17 @@ const [products, setProducts] = useState([])
                                 width="50px"
                                 src={`http://localhost:8000/storage/profilepic/image/${row.profile_picture}`}
                               />
-                            
-                           
                           </span>
                         );
                       } else {
                         return "";
                       }
                     })}
+              </label>
+
               <form>
               <input type="file" id="uploadpicture"
-              //  style={{display:"none"}}
+               style={{display:"none"}}
               onChange={uploadpic}
               /></form>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Notifications\Notification;
 use Carbon\Carbon;
 
 class ProductController extends Controller
@@ -14,8 +15,9 @@ class ProductController extends Controller
    
     public function index()
     {
+        // $try = Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image','Create_By')->paginate(1);
         return Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image','Create_By')->get();
-        // ->where('Create_By','=','1')
+// return $try->get();
     }
 
     public function store(Request $request)

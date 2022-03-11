@@ -53,12 +53,12 @@ DB::table('users')->where('id', 1)->update($request->post()+['profile_picture'=>
             // picupload::create($request->post()+['profile_picture'=>$imageName]);
         
             return response()->json([
-                'message'=>' Created Employee Successfully'
+                'message'=>' Updated Successfully'
             ]);
         }catch(\Exception $e){
             \Log::error($e->getMessage());
             return response()->json([
-                'message'=>'Something goes wrong while creating a Employee'
+                'message'=>'Something goes wrong while updateing th picture'
             ],500);
         }
        
