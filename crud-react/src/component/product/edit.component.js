@@ -78,7 +78,7 @@ export default function EditUser() {
 
   return (
     <div className="container">
-      {FirstName}
+  
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-6">
           <div className="card">
