@@ -1,12 +1,13 @@
 
 import React, { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { IoArrowBackCircleSharp } from "react-icons/io5";
 
 export default function EditUser() {
   const navigate = useNavigate();
@@ -54,8 +55,8 @@ export default function EditUser() {
           <div className="card">
             <div className="card-body">
             <div className='col-12'>
-                <Link className='btn btn-primary mb-2 float-end' to={"/"}>
-                    Back
+                <Link className=' mb-2 float-end' to={"/"}>
+                <IoArrowBackCircleSharp  size={32}/>
                 </Link>
             </div>
               <h4 className="card-title">View</h4>

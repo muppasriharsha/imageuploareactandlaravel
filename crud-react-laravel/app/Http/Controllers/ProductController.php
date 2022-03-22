@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notification;
 use Carbon\Carbon;
@@ -13,11 +14,10 @@ use Carbon\Carbon;
 class ProductController extends Controller
 {
    
-    public function index()
+    public function index(User $user)
     {
-        // $try = Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image','Create_By')->paginate(1);
-        return Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image','Create_By')->get();
-// return $try->get();
+        // $id = $this->session->flashdata('item');
+        return Product::select('user_Id','FirstName','LastName','Email_ID','State_ID','City_ID','image','Create_By') ->get();
     }
 
     public function store(Request $request)
@@ -38,7 +38,8 @@ class ProductController extends Controller
             Product::create($request->post()+['image'=>$imageName]);
 
             return response()->json([
-                'message'=>' Created Employee Successfully'
+                'status'=>200,
+                'message'=>'Created Employee Successfully'
             ]);
         }catch(\Exception $e){
             \Log::error($e->getMessage());

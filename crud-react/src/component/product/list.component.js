@@ -288,7 +288,7 @@
 
 // try pagination below
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 // import './App.css'
 import { useSelector } from "react-redux";
@@ -297,9 +297,9 @@ import Swal from 'sweetalert2';
 
 export default function List() {
   const allStates = useSelector((state) => state);
-  const [offset, setOffset] = useState(0); 
+  const [offset, setOffset] = useState(1); 
   const [data, setData] = useState([]);
-  const [perPage] = useState(1);
+  const [perPage] = useState(2);
   const [pageCount, setPageCount] = useState(0)
   const[tab,settab]=useState()
 
@@ -342,19 +342,19 @@ export default function List() {
        <thead>
                                  {/* <tr> */}
                                  <th>FirstName</th>
-                                      <th>LastName</th>
-                                      <th>Email_ID</th>
-                                      <th>State_ID</th>
-                                      <th>City_ID</th>
-                                      <th>Image</th>
-                                      <th>Actions</th>
+                                      <th style={{padding:"0px 10px 0px 10px"}}>LastName</th>
+                                      <th style={{padding:"0px 70px 0px 70px"}}>Email_ID</th>
+                                      <th style={{padding:"0px 30px 0px 70px"}}>State_ID</th>
+                                      <th style={{padding:"0px 0px 0px 0px"}}>City_ID</th>
+                                      <th style={{padding:"0px 70px 0px 70px"}}>Image</th>
+                                      <th style={{padding:"0px 70px 0px 70px"}}>Actions</th>
                                  {/* </tr> */}
                              </thead>
                              </table> 
                              )
                              settab(tabl)
                             //  console.log(tab)
-                const slice = data.slice(offset - 1  , offset - 1 + perPage)
+                const slice = data.slice(offset -1  , offset  + perPage-1)
                 const postData = slice.map(pd =>  <div key={pd.user_Id}>
 {/* {
 if(pd.Created_By==1){
@@ -455,6 +455,8 @@ if(pd.Created_By==1){
                  <div className="card card-body">
                      <div className="table-responsive">
                        {tab}
+                       
+                    
                          {data}
                          
        <ReactPaginate

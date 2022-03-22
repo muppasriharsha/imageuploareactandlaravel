@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Form from 'react-bootstrap/Form'
+// import Form from 'react-bootstrap/Form'
 
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.css";
@@ -14,14 +14,15 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { BrowserRouter as Router , Routes, Route, Link,
   useNavigate } from "react-router-dom";
-  import store from "./component/redux/store";
+  // import store from "./component/redux/store";
 import EditProduct from "./component/product/edit.component";
 import ViewProduct from "./component/product/view.component";
-import ProductList from "./component/product/list.component";
+import Main from "./component/product/listcomponent/main.js";
 import CreateProduct from "./component/product/create.component";
+import { AiOutlinePoweroff } from "react-icons/ai";
 // import { Provider as StoreProvider } from "react-redux";
-import { getDefaultNormalizer } from "@testing-library/react";
-// 
+// import { getDefaultNormalizer } from "@testing-library/react";
+
 
 export const AuthContext = React.createContext(false);
 
@@ -29,7 +30,7 @@ function App() {
   let navigate = useNavigate();
   
   const [isLogged, setIsLogged] = useState(false);
-  const [profilepic, setprofilepic] = useState({imgvalue:""});
+  // const [profilepic, setprofilepic] = useState({imgvalue:""});
   
   const allStates = useSelector((state) => state);
   // console.log(allStates)
@@ -40,6 +41,7 @@ function App() {
 const uploadpic=  (event)=>{
   const file=  event.target.files[0];
   console.log(file);
+  const $id =  allStates.loginuserid;
   
 //  setprofilepic((prev)=>({...prev,imgvalue:file}));
 //   console.log(profilepic.imgvalue)
@@ -47,6 +49,7 @@ const uploadpic=  (event)=>{
   const formdata = new FormData()
   
   formdata.append('profile_picture',file)
+  formdata.append('id',allStates.loginuserid)
 
   axios.post(`http://localhost:8000/api/picupload`, formdata).then(({data})=>{
       console.log(data)
@@ -62,7 +65,7 @@ const uploadpic=  (event)=>{
     .catch(({response:{data}})=>{
       Swal.fire({
         text:data.message,
-        icon:"error"
+        icon:"error",
     })
     })
 
@@ -170,7 +173,7 @@ const [render,setrender]=useState(false)
                 }}
                 className="navbar-brand text-white"
               >
-                Logout
+                <AiOutlinePoweroff size={20}/>
               </Link>
             </>
           )}
@@ -186,7 +189,7 @@ const [render,setrender]=useState(false)
                 path="/"
                 element={
                   isLogged ? (
-                    <ProductList />
+                    <Main/>
                   ) : (
                     <LoginPage handleForm={FormHandling} />
                   )

@@ -5,9 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
+  // Route,
+  // Routes,
+  // useLocation,
 } from "react-router-dom";
 import { StrictMode } from "react";
 import store from "./component/redux/store";

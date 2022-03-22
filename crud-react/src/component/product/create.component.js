@@ -7,6 +7,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2';
 import { useSelector } from "react-redux";
 import { useNavigate, Link } from 'react-router-dom'
+import { IoArrowBackCircleSharp } from "react-icons/io5";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -67,8 +68,8 @@ console.log(formData.image)
           <div className="card">
             <div className="card-body">
               <div className='col-12'>
-                <Link className='btn btn-primary mb-2 float-end' to={"/"}>
-                    Back
+                <Link className=' float-end' to={"/"}>
+                <IoArrowBackCircleSharp  size={32}/>
                 </Link>
                 {/* {allStates.userloginid} */}
             </div>

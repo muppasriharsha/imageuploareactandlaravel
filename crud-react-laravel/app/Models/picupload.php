@@ -9,8 +9,8 @@ class picupload extends Model
 {
     use HasFactory;
 
-     public $table='profilepic';
+     public $table='users';
      protected $primaryKey = 'id';
-     protected $fillable = ['userpic'];
+     protected $fillable = ['profile_picture'];
     //  use Carbon\Carbon;
     }
